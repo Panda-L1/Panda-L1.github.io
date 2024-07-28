@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>2024 | Panda</title><meta name="author" content="PandaLi"><meta name="copyright" content="PandaLi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="2024"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="https://panda-l1.github.io/archives/2024/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: PandaLi","link":"链接: ","source":"来源: Panda","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '2024',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-07-28 17:49:33'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4614391_5vk9m3aq78x.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/images/default_top_img.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Panda"><span class="site-name">Panda</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">2024</h1></div></header><main class="layout" id="content-inner"><div id="archive"><div class="article-sort-title">文章总览 - 7</div><div class="article-sort"><div class="article-sort-item year">2024</div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"><img src="/images/redis/Redis.png" alt="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-26T06:52:41.000Z" title="发表于 2024-07-26 14:52:41">2024-07-26</time></div><a class="article-sort-item-title" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计">Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/a621503d.html" title="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson"><img src="/images/redis/Redis.png" alt="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-23T03:30:47.000Z" title="发表于 2024-07-23 11:30:47">2024-07-23</time></div><a class="article-sort-item-title" href="/junwei/a621503d.html" title="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson">Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/a6b15897.html" title="Redis实战篇（一）：短信登录和商品缓存"><img src="/images/redis/Redis.png" alt="Redis实战篇（一）：短信登录和商品缓存" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-18T06:44:20.000Z" title="发表于 2024-07-18 14:44:20">2024-07-18</time></div><a class="article-sort-item-title" href="/junwei/a6b15897.html" title="Redis实战篇（一）：短信登录和商品缓存">Redis实战篇（一）：短信登录和商品缓存</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/14c0f7d1.html" title="Redis入门篇（二）：Redis的常用命令和Java客户端"><img src="/images/redis/Redis.png" alt="Redis入门篇（二）：Redis的常用命令和Java客户端" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-17T06:39:31.000Z" title="发表于 2024-07-17 14:39:31">2024-07-17</time></div><a class="article-sort-item-title" href="/junwei/14c0f7d1.html" title="Redis入门篇（二）：Redis的常用命令和Java客户端">Redis入门篇（二）：Redis的常用命令和Java客户端</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/b6c30fde.html" title="Redis入门篇（一）：初始Redis及其安装"><img src="/images/redis/Redis.png" alt="Redis入门篇（一）：初始Redis及其安装" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-16T11:42:06.000Z" title="发表于 2024-07-16 19:42:06">2024-07-16</time></div><a class="article-sort-item-title" href="/junwei/b6c30fde.html" title="Redis入门篇（一）：初始Redis及其安装">Redis入门篇（一）：初始Redis及其安装</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/c38bdf9f.html" title="后端技术栈"><img src="/images/backend/spring.png" alt="后端技术栈" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-10T12:10:55.000Z" title="发表于 2024-07-10 20:10:55">2024-07-10</time></div><a class="article-sort-item-title" href="/junwei/c38bdf9f.html" title="后端技术栈">后端技术栈</a></div></div><div class="article-sort-item"><a class="article-sort-item-img" href="/junwei/4a17b156.html" title="欢迎来到我的博客"><img src="/images/default_cover.jpg" alt="欢迎来到我的博客" onerror="this.onerror=null;this.src='/img/404.jpg'"></a><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2024-07-09T11:26:30.494Z" title="发表于 2024-07-09 19:26:30">2024-07-09</time></div><a class="article-sort-item-title" href="/junwei/4a17b156.html" title="欢迎来到我的博客">欢迎来到我的博客</a></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">PandaLi</div><div class="author-info__description">悟已往之不谏，知来者之可追</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Panda-L1"><i class="iconfont icon-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Panda-L1" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="https://gitee.com/pandal1" target="_blank" title="Gitee"><i class="iconfont icon-gitee"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_73310000" target="_blank" title="CSDN"><i class="iconfont icon-csdn_hong"></i></a><a class="social-icon" href="mailto:junwei5289@gmail.com" target="_blank" title="Email"><i class="iconfont icon--gmail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center"><font color="#e66b6d"><b>双</b></font> <font color="#e66d98"><b>手</b></font> <font color="#e66cc6"><b>合</b></font> <font color="#cc6de6"><b>十</b></font> <font color="#9770e6"><b>成</b></font> <font color="#6d93e6"><b>为</b></font> <font color="#6fcde6"><b>自</b></font> <font color="#72e6b6"><b>己</b></font> <font color="#72e689"><b>的</b></font> <font color="#99e670"><b>神</b></font></p> <p align="center"><font color="#cde670"><b>自</b></font> <font color="#e6df72"><b>己</b></font> <font color="#e6c073"><b>所</b></font> <font color="#e6a271"><b>信</b></font> <font color="#e6796f"><b>念</b></font> <font color="#e65454"><b>的</b></font> <font color="#e63333"><b>即</b></font> <font color="#e62c2c"><b>是</b></font> <font color="#e60101"><b>信</b></font> <font color="#e60101"><b>仰</b></font></p> <p align="center"><img src="https://haiyong.site/img/img-blog.csdnimg.cn/f7384c88956d4378b72e47548e19c9f8.gif" width="50" alt="mao"></p> <p align="center"><font color="#e66b6d"><b>微</b></font> <font color="#e66d98"><b>信</b></font> <font color="#e66cc6"><b>号</b></font> <font color="#cc6de6"><b>：</b></font> <font color="#9770e6"><b>L</b></font> <font color="#6d93e6"><b>I</b></font> <font color="#6fcde6"><b>J</b></font> <font color="#72e6b6"><b>J</b></font> <font color="#72e689"><b>J</b></font> <font color="#99e670"><b>W</b></font> <font color="#cde670"><b>E</b></font> <font color="#e6df72"><b>I</b></font></p> <p align="center"><font color="#e66b6d"><b>Q</b></font> <font color="#e66d98"><b>Q</b></font> <font color="#e66cc6"><b>号</b></font> <font color="#cc6de6"><b>：</b></font> <font color="#9770e6"><b>2</b></font> <font color="#6d93e6"><b>8</b></font> <font color="#6fcde6"><b>4</b></font> <font color="#72e6b6"><b>8</b></font> <font color="#72e689"><b>5</b></font> <font color="#99e670"><b>2</b></font> <font color="#cde670"><b>7</b></font> <font color="#e6df72"><b>4</b></font> <font color="#e6c073"><b>8</b></font> <font color="#e6a271"><b>5</b></font></p></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"/></a><div class="content"><a class="title" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计">Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计</a><time datetime="2024-07-26T06:52:41.000Z" title="发表于 2024-07-26 14:52:41">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/a621503d.html" title="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson"/></a><div class="content"><a class="title" href="/junwei/a621503d.html" title="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson">Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson</a><time datetime="2024-07-23T03:30:47.000Z" title="发表于 2024-07-23 11:30:47">2024-07-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/a6b15897.html" title="Redis实战篇（一）：短信登录和商品缓存"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis实战篇（一）：短信登录和商品缓存"/></a><div class="content"><a class="title" href="/junwei/a6b15897.html" title="Redis实战篇（一）：短信登录和商品缓存">Redis实战篇（一）：短信登录和商品缓存</a><time datetime="2024-07-18T06:44:20.000Z" title="发表于 2024-07-18 14:44:20">2024-07-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/14c0f7d1.html" title="Redis入门篇（二）：Redis的常用命令和Java客户端"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis入门篇（二）：Redis的常用命令和Java客户端"/></a><div class="content"><a class="title" href="/junwei/14c0f7d1.html" title="Redis入门篇（二）：Redis的常用命令和Java客户端">Redis入门篇（二）：Redis的常用命令和Java客户端</a><time datetime="2024-07-17T06:39:31.000Z" title="发表于 2024-07-17 14:39:31">2024-07-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/b6c30fde.html" title="Redis入门篇（一）：初始Redis及其安装"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis入门篇（一）：初始Redis及其安装"/></a><div class="content"><a class="title" href="/junwei/b6c30fde.html" title="Redis入门篇（一）：初始Redis及其安装">Redis入门篇（一）：初始Redis及其安装</a><time datetime="2024-07-16T11:42:06.000Z" title="发表于 2024-07-16 19:42:06">2024-07-16</time></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-comment-dots"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Redis/"><span class="card-category-list-name">Redis</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%90%8E%E7%AB%AF/"><span class="card-category-list-name">后端</span><span class="card-category-list-count">1</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 1.1em; color: #999">后端</a> <a href="/tags/Redis/" style="font-size: 1.5em; color: #99a9bf">Redis</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2024-07-06T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">38.5k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-07-28T09:49:33.290Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/images/default_top_img.png')"><div id="footer-wrap"><div class="copyright">&copy;2024 By PandaLi</div><div class="footer_custom_text">用清晰的视角，做有用的博客</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://junwei5289.netlify.app/.netlify/functions/twikoo',
+        region: 'ap-guangzhou',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: true,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var a=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,d=o();function o(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(t){(a||t)&&(d=o());for(var e,i=0;i<d.length;i++)0<=(e=(e=d[i]).getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,a,n,o=d[i];e=function(){d=d.filter(function(t){return o!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(o)},(t=o).dataset.loaded||(t.hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(a=new Image,n=t.getAttribute("data-original"),a.onload=function(){t.src=n,t.removeAttribute("data-original"),t.setAttribute("data-loaded",!0),e&&e()},a.onerror=function(){t.removeAttribute("data-original"),t.setAttribute("data-loaded",!1),t.src=n},t.src!==n&&(a.src=n)))}()}function e(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",e),r.addEventListener("resize",e),r.addEventListener("orientationchange",e)}(this);</script></body></html>
