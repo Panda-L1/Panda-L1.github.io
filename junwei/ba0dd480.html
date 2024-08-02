@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Tabby：一款出色的开源终端工具 | Panda</title><meta name="author" content="PandaLi"><meta name="copyright" content="PandaLi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Tabby是一种现代化、轻量级的终端应用程序。它旨在提供更好的用户体验和可扩展性，适用于需要频繁使用终端的用户"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="https://panda-l1.github.io/junwei/ba0dd480.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: PandaLi","link":"链接: ","source":"来源: Panda","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Tabby：一款出色的开源终端工具',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-01 17:32:43'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4614391_5vk9m3aq78x.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../images/tools/tabby/tabby.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Panda"><span class="site-name">Panda</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Tabby：一款出色的开源终端工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-01T00:17:24.000Z" title="发表于 2024-08-01 08:17:24">2024-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-01T09:32:43.337Z" title="更新于 2024-08-01 17:32:43">2024-08-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">743</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Tabby：一款出色的开源终端工具"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Tabby"><a href="#Tabby" class="headerlink" title="Tabby"></a>Tabby</h1><p><strong>Tabby - a terminal for a more modern age</strong>，是一种现代化、轻量级的终端（terminal）应用程序。它旨在提供更好的用户体验和可扩展性，适用于开发者、系统管理员和其他需要频繁使用终端的用户，帮助他们更高效地管理和操作终端任务，支持Windows、macOS和Linux操作系统，支持文件快速传输……最重要的是，长在了年轻人的审美上面！</p>
+<img src="../images/tools/tabby/1.png" alt="1" style="zoom:30%;" />
+
+<h1 id="安装Tabby"><a href="#安装Tabby" class="headerlink" title="安装Tabby"></a>安装Tabby</h1><p>直接打开<a target="_blank" rel="noopener" href="https://tabby.sh/">Tabby</a>官网，点击「download」按钮就可以跳转到下载页面，Windows用户可以直接找到setup-x64.exe下载安装。</p>
+<img src="../images/tools/tabby/2.png" alt="2" style="zoom:30%;" />
+
+<p>安装完成后你就拥有了一个炫酷的终端软件</p>
+<img src="../images/tools/tabby/12.png" alt="12" style="zoom: 50%;" />
+
+<h1 id="配置Tabby"><a href="#配置Tabby" class="headerlink" title="配置Tabby"></a>配置Tabby</h1><p>用户可以根据自己的喜好自定义外观和行为，包括主题、配色方案、字体等</p>
+<h2 id="语言设置"><a href="#语言设置" class="headerlink" title="语言设置"></a>语言设置</h2><p>打开Tabby，找到右上角齿轮图标，打开设置，在<code>Application settings</code>中的<code>Language</code>中选择中文即可</p>
+<img src="../images/tools/tabby/3.png" alt="3" style="zoom:50%;" />
+
+<h2 id="配色方案"><a href="#配色方案" class="headerlink" title="配色方案"></a>配色方案</h2><p>在左侧配色方案可以选着自己想要的主题，<code>暗色</code> or <code>亮色</code>，有丰富的配色方案可供选择</p>
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="../images/tools/tabby/4.png" width="400"/>
+    <img src="../images/tools/tabby/5.png" width="400"/>
+</div>
+
+<h2 id="插件下载"><a href="#插件下载" class="headerlink" title="插件下载"></a>插件下载</h2><p>左侧插件中提供了Tabby的插件下载</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby-docker">docker</a> - 连接到 Docker 容器</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kbjr/terminus-title-control">title-control</a> - 允许通过提供要删除的前缀、后缀和&#x2F;或字符串来修改终端选项卡的标题</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Domain/terminus-quick-cmds">quick-cmds</a> - 快速向一个或所有终端选项卡发送命令</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/Eugeny/tabby-save-output">save-output</a> - 将终端输出记录到文件中</li>
+</ul>
+<p><img src="/../images/tools/tabby/6.png" alt="6"></p>
+<h1 id="SSH连接"><a href="#SSH连接" class="headerlink" title="SSH连接"></a>SSH连接</h1><p>SSH连接是我们使用终端最常用的功能，可以方便我们操作Linux系统</p>
+<ol>
+<li><p>找到设置中左侧的配置和连接，新建，新配置，选择SSH连接为模板</p>
+</li>
+<li><p>输入名称，主机IP，用户名和密码，点击保存即可完成自定义配置</p>
+</li>
+</ol>
+<img src="../images/tools/tabby/7.png" alt="7" style="zoom:50%;" />
+
+<ol start="3">
+<li>点击某个配置启动按钮，即可建立连接</li>
+</ol>
+<img src="../images/tools/tabby/8.png" alt="8" style="zoom:67%;" />
+
+<ol start="4">
+<li>这样你就拥有了一个好看的终端，可以操作你的Linux系统</li>
+</ol>
+<img src="../images/tools/tabby/9.png" alt="9" style="zoom:50%;" />
+
+<ol start="5">
+<li>当然，你也可以做到分屏效果，同时开多个终端，在标签处（名字）右键，点击拆分即可，同时操作更多</li>
+</ol>
+<img src="../images/tools/tabby/10.png" alt="10" style="zoom: 50%;" />
+
+<h1 id="SFTP文件传输"><a href="#SFTP文件传输" class="headerlink" title="SFTP文件传输"></a>SFTP文件传输</h1><p>在右上角的SFTP处可以打开SFTP窗口，可以<strong>创建文件夹</strong>和<strong>上传文件</strong>，也支持<strong>直接将文件拖拽入窗口</strong>实现上传（记得先去到目标文件夹哦！），双击某个文件可以对该文件进行下载或者鼠标右键点击本地编辑。</p>
+<img src="../images/tools/tabby/11.png" alt="11" style="zoom:50%;" />
+
+<h1 id="cmd使用"><a href="#cmd使用" class="headerlink" title="cmd使用"></a>cmd使用</h1><p>在每次重新打开系统cmd的时候，没有历史记录，我都要不断地重复输入，很繁琐</p>
+<p>并且某些时候你还需要去到指定的文件夹，这时设置cmd的工作目录，再将该配置保存起来，下次点击配置运行即可</p>
+<img src="../images/tools/tabby/13.png" alt="13" style="zoom: 80%;" />
+
+<p>Tabby可以帮助我们记住历史命令，即使软件被关闭，可以一键➡补全，减去繁琐的输入</p>
+<img src="../images/tools/tabby/14.png" alt="14" style="zoom: 70%;" />
+
+<p>功能与cmd完全一样，还有Power shell，Git bash等等</p>
+<img src="../images/tools/tabby/15.png" alt="15" style="zoom: 67%;" />
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://panda-l1.github.io">PandaLi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://panda-l1.github.io/junwei/ba0dd480.html">https://panda-l1.github.io/junwei/ba0dd480.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://panda-l1.github.io" target="_blank">Panda</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%B7%A5%E5%85%B7/">工具</a></div><div class="post_share"><div class="social-share" data-image="/../images/tools/tabby/tabby.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/junwei/af87aed8.html" title="Redis分布式实现：持久化和集群方案"><img class="cover" src="/images/redis/Redis.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Redis分布式实现：持久化和集群方案</div></div></a></div><div class="next-post pull-right"><a href="/junwei/bb88bfb7.html" title="后端开发入门Docker：从基础到实践"><img class="cover" src="/./images/docker/docker.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">后端开发入门Docker：从基础到实践</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">PandaLi</div><div class="author-info__description">悟已往之不谏，知来者之可追</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Panda-L1"><i class="iconfont icon-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Panda-L1" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="https://gitee.com/pandal1" target="_blank" title="Gitee"><i class="iconfont icon-gitee"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_73310000" target="_blank" title="CSDN"><i class="iconfont icon-csdn_hong"></i></a><a class="social-icon" href="mailto:junwei5289@gmail.com" target="_blank" title="Email"><i class="iconfont icon--gmail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center"><font color="#e66b6d"><b>双</b></font> <font color="#e66d98"><b>手</b></font> <font color="#e66cc6"><b>合</b></font> <font color="#cc6de6"><b>十</b></font> <font color="#9770e6"><b>成</b></font> <font color="#6d93e6"><b>为</b></font> <font color="#6fcde6"><b>自</b></font> <font color="#72e6b6"><b>己</b></font> <font color="#72e689"><b>的</b></font> <font color="#99e670"><b>神</b></font></p> <p align="center"><font color="#cde670"><b>自</b></font> <font color="#e6df72"><b>己</b></font> <font color="#e6c073"><b>所</b></font> <font color="#e6a271"><b>信</b></font> <font color="#e6796f"><b>念</b></font> <font color="#e65454"><b>的</b></font> <font color="#e63333"><b>即</b></font> <font color="#e62c2c"><b>是</b></font> <font color="#e60101"><b>信</b></font> <font color="#e60101"><b>仰</b></font></p> <p align="center"><img src="https://haiyong.site/img/img-blog.csdnimg.cn/f7384c88956d4378b72e47548e19c9f8.gif" width="50" alt="mao"></p> <p align="center"><font color="#e66b6d"><b>微</b></font> <font color="#e66d98"><b>信</b></font> <font color="#e66cc6"><b>号</b></font> <font color="#cc6de6"><b>：</b></font> <font color="#9770e6"><b>L</b></font> <font color="#6d93e6"><b>I</b></font> <font color="#6fcde6"><b>J</b></font> <font color="#72e6b6"><b>J</b></font> <font color="#72e689"><b>J</b></font> <font color="#99e670"><b>W</b></font> <font color="#cde670"><b>E</b></font> <font color="#e6df72"><b>I</b></font></p> <p align="center"><font color="#e66b6d"><b>Q</b></font> <font color="#e66d98"><b>Q</b></font> <font color="#e66cc6"><b>号</b></font> <font color="#cc6de6"><b>：</b></font> <font color="#9770e6"><b>2</b></font> <font color="#6d93e6"><b>8</b></font> <font color="#6fcde6"><b>4</b></font> <font color="#72e6b6"><b>8</b></font> <font color="#72e689"><b>5</b></font> <font color="#99e670"><b>2</b></font> <font color="#cde670"><b>7</b></font> <font color="#e6df72"><b>4</b></font> <font color="#e6c073"><b>8</b></font> <font color="#e6a271"><b>5</b></font></p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Tabby"><span class="toc-number">1.</span> <span class="toc-text">Tabby</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85Tabby"><span class="toc-number">2.</span> <span class="toc-text">安装Tabby</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AETabby"><span class="toc-number">3.</span> <span class="toc-text">配置Tabby</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%AD%E8%A8%80%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text">语言设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88"><span class="toc-number">3.2.</span> <span class="toc-text">配色方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.3.</span> <span class="toc-text">插件下载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSH%E8%BF%9E%E6%8E%A5"><span class="toc-number">4.</span> <span class="toc-text">SSH连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SFTP%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93"><span class="toc-number">5.</span> <span class="toc-text">SFTP文件传输</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cmd%E4%BD%BF%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">cmd使用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/junwei/bb88bfb7.html" title="后端开发入门Docker：从基础到实践"><img src="/./images/docker/docker.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="后端开发入门Docker：从基础到实践"/></a><div class="content"><a class="title" href="/junwei/bb88bfb7.html" title="后端开发入门Docker：从基础到实践">后端开发入门Docker：从基础到实践</a><time datetime="2024-08-01T03:41:03.000Z" title="发表于 2024-08-01 11:41:03">2024-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/ba0dd480.html" title="Tabby：一款出色的开源终端工具"><img src="/../images/tools/tabby/tabby.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Tabby：一款出色的开源终端工具"/></a><div class="content"><a class="title" href="/junwei/ba0dd480.html" title="Tabby：一款出色的开源终端工具">Tabby：一款出色的开源终端工具</a><time datetime="2024-08-01T00:17:24.000Z" title="发表于 2024-08-01 08:17:24">2024-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/af87aed8.html" title="Redis分布式实现：持久化和集群方案"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis分布式实现：持久化和集群方案"/></a><div class="content"><a class="title" href="/junwei/af87aed8.html" title="Redis分布式实现：持久化和集群方案">Redis分布式实现：持久化和集群方案</a><time datetime="2024-07-29T11:13:10.000Z" title="发表于 2024-07-29 19:13:10">2024-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"/></a><div class="content"><a class="title" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计">Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计</a><time datetime="2024-07-26T06:52:41.000Z" title="发表于 2024-07-26 14:52:41">2024-07-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/a621503d.html" title="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson"/></a><div class="content"><a class="title" href="/junwei/a621503d.html" title="Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson">Redis实战篇（二）：秒杀问题及其优化和分布式锁与Redisson</a><time datetime="2024-07-23T03:30:47.000Z" title="发表于 2024-07-23 11:30:47">2024-07-23</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/../images/tools/tabby/tabby.png')"><div id="footer-wrap"><div class="copyright">&copy;2024 By PandaLi</div><div class="footer_custom_text">用清晰的视角，做有用的博客</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://junwei5289.netlify.app/.netlify/functions/twikoo',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://junwei5289.netlify.app/.netlify/functions/twikoo',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
