@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>部署之道：整合、分离与容器化的前后端部署方法 | Panda</title><meta name="author" content="PandaLi"><meta name="copyright" content="PandaLi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="详解三种前后端部署方法：集成dist文件到后端、Nginx反向代理分离部署以及Docker容器化部署，助你轻松实现项目上线。"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="canonical" href="https://panda-l1.github.io/junwei/b42087a8.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: PandaLi","link":"链接: ","source":"来源: Panda","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '部署之道：整合、分离与容器化的前后端部署方法',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-05 17:13:43'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="//at.alicdn.com/t/c/font_4614391_5vk9m3aq78x.css"><meta name="generator" content="Hexo 7.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/xlenco/JS-X@main/pace.js/pace.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/images/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/../images/b42087a8/cover.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Panda"><span class="site-name">Panda</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">部署之道：整合、分离与容器化的前后端部署方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-04T14:29:08.000Z" title="发表于 2024-08-04 22:29:08">2024-08-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-05T09:13:43.479Z" title="更新于 2024-08-05 17:13:43">2024-08-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="部署之道：整合、分离与容器化的前后端部署方法"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="将-Vue打包文件直接集成到后端部署"><a href="#将-Vue打包文件直接集成到后端部署" class="headerlink" title="将 Vue打包文件直接集成到后端部署"></a>将 Vue打包文件直接集成到后端部署</h1><p>这里使用我的大二课程作业给大家在 Windows 下演示将 Vue打包文件直接集成到后端部署</p>
+<h2 id="配置前端构建输出"><a href="#配置前端构建输出" class="headerlink" title="配置前端构建输出"></a>配置前端构建输出</h2><p>打开你的 Vue 项目，在终端中输入<code>npm run build</code>命令，直到看见<code>Build complete.</code>说明打包完成</p>
+<p><img src="/../images/b42087a8/1.png" alt="1"></p>
+<p>打包完成后你会在目录中看见一个<code>dist</code>文件夹，里面会有<code>index.html</code>文件和<code>css</code>、<code>img</code>、<code>js</code>等文件夹</p>
+<p><img src="/../images/b42087a8/2.png" alt="2"></p>
+<h2 id="将-dist-中文件复制到后端项目中"><a href="#将-dist-中文件复制到后端项目中" class="headerlink" title="将 dist 中文件复制到后端项目中"></a>将 <code>dist</code> 中文件复制到后端项目中</h2><p>假设你的后端项目使用的是Spring Boot，你需要将<code>dist</code>文件夹中的内容复制到<code>src/main/resources/static</code>目录下。这个目录是Spring Boot默认的静态资源文件目录。</p>
+<img src="../images/b42087a8/3.png" alt="3" style="zoom: 80%;" />
+
+<h2 id="配置后端服务器以服务静态文件"><a href="#配置后端服务器以服务静态文件" class="headerlink" title="配置后端服务器以服务静态文件"></a>配置后端服务器以服务静态文件</h2><p>如果是 Spring Boot 项目，确保在<code>application.properties</code>或<code>application.yml</code>中有以下配置，这会告诉Spring Boot在处理请求时，会首先在<code>static</code>目录下查找匹配的静态资源</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">web</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">resources</span>:<span class="string"></span></span><br><span class="line">      <span class="attr">static-locations</span>: <span class="string">classpath:/static</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="部署与测试"><a href="#部署与测试" class="headerlink" title="部署与测试"></a>部署与测试</h2><p>项目的启动可以直接使用 IDE 启动，也可以打包成 Jar 包后命令启动，这里直接使用一键启动</p>
+<p>访问自己电脑的 IP 地址或者使用<code>localhost</code>都可，访问 Spring Boot 设置的后端端口，能看到前端页面和请求状态码200说明成功</p>
+<p>在这种方式下，你只需要启动后端服务即可实现前后端部署</p>
+<img src="../images/b42087a8/4.png" alt="4" style="zoom: 50%;" />
+
+<h1 id="使用-Nginx-反向代理实现前后端分离部署"><a href="#使用-Nginx-反向代理实现前后端分离部署" class="headerlink" title="使用 Nginx 反向代理实现前后端分离部署"></a>使用 Nginx 反向代理实现前后端分离部署</h1><p>这里使用我的大二课程作业给大家在Windows下演示使用 Nginx 反向代理实现前后端分离部署</p>
+<h2 id="配置前端构建输出-1"><a href="#配置前端构建输出-1" class="headerlink" title="配置前端构建输出"></a>配置前端构建输出</h2><p>打开你的 Vue 项目，在终端中输入<code>npm run build</code>命令，直到看见<code>Build complete.</code>说明打包完成</p>
+<p><img src="/../images/b42087a8/1.png" alt="1"></p>
+<p>打包完成后你会在目录中看见一个<code>dist</code>文件夹，里面会有<code>index.html</code>文件和<code>css</code>、<code>img</code>、<code>js</code>等文件夹</p>
+<p><img src="/../images/b42087a8/2.png" alt="2"></p>
+<p>将<code>dist</code>整个文件夹复制到 Nginx 根目录下的<code>html</code>文件夹中，同时可以修改文件夹为你需要的名字，我这里就叫<code>maiba</code>好了</p>
+<p><img src="/../images/b42087a8/5.png" alt="5"></p>
+<h2 id="设置-Nginx-反向代理"><a href="#设置-Nginx-反向代理" class="headerlink" title="设置 Nginx 反向代理"></a>设置 Nginx 反向代理</h2><p>打开<code>conf</code>目录下的<code>nginx.conf</code>文件夹，修改配置，注意修改为自己对应的文件夹名和后端端口</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">worker_processes</span>  <span class="string">1;  # 定义工作进程数量</span></span><br><span class="line"></span><br><span class="line"><span class="attr">events</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">worker_connections</span>  <span class="string">1024;  # 定义每个工作进程的最大连接数</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">http</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">include</span>       <span class="string">mime.types;  # 包含文件类型定义</span></span><br><span class="line">    <span class="attr">default_type</span>  <span class="string">application/octet-stream;  # 默认文件类型</span></span><br><span class="line">    <span class="attr">sendfile</span>        <span class="string">on;  # 开启高效文件传输模式</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">keepalive_timeout</span>  <span class="string">65;  # 连接保持超时时间</span></span><br><span class="line">    <span class="attr">server</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">listen</span>       <span class="string">80;  # 监听端口号</span></span><br><span class="line">        <span class="attr">server_name</span>  <span class="string">localhost;  # 服务器名称</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/ &#123;</span></span><br><span class="line">            <span class="attr">root</span>   <span class="string">html/maiba;  # 网站根目录</span></span><br><span class="line">            <span class="attr">index</span>  <span class="string">index.html index.htm;  # 默认首页文件</span></span><br><span class="line">        <span class="attr">&#125;</span></span><br><span class="line">        <span class="attr">error_page</span>   <span class="string">500 502 503 504  /50x.html;  # 错误页面配置</span></span><br><span class="line">        <span class="attr">location</span> = <span class="string">/50x.html &#123;</span></span><br><span class="line">            <span class="attr">root</span>   <span class="string">html;  # 错误页面根目录</span></span><br><span class="line">        <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/api/ &#123;</span></span><br><span class="line">            <span class="attr">proxy_pass</span> <span class="string">http://localhost:8081;  # 后端服务地址</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">Host $host;  # 设置请求头Host</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Real-IP $remote_addr;  # 设置请求头X-Real-IP</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forwarded-For $proxy_add_x_forwarded_for;  # 设置请求头X-Forwarded-For</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forwarded-Proto $scheme;  # 设置请求头X-Forwarded-Proto</span></span><br><span class="line">        <span class="attr">&#125;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="部署与测试-1"><a href="#部署与测试-1" class="headerlink" title="部署与测试"></a>部署与测试</h2><p>项目的启动可以直接使用 IDE 启动，也可以打包成 Jar 包后命令启动，这里直接使用一键启动</p>
+<p>访问自己电脑的 IP 地址或者使用<code>localhost</code>都可，由于 Nginx 中配置的是<code>80</code>端口，所以直接访问 IP 地址或者<code>localhost</code>即可，无需特意输入端口，能看到前端页面和请求状态码200说明成功</p>
+<p>在这种方式下，你需要同时运行 Nginx 和后端项目</p>
+<img src="../images/b42087a8/6.png" alt="6" style="zoom:50%;" />
+
+<h1 id="通过-Docker-实现前后端的容器化部署"><a href="#通过-Docker-实现前后端的容器化部署" class="headerlink" title="通过 Docker 实现前后端的容器化部署"></a>通过 Docker 实现前后端的容器化部署</h1><p>这里使用我的大二课程作业给大家在 CentOS 7 下演示通过 Docker 实现前后端的容器化部署，同时开启<code>Nginx</code>、<code>MySQL</code>、<code>Redis</code>等服务</p>
+<p>如果不适用 Redis 可以省略对应的步骤，并且注意在 Compose 文件中去掉 Redis 的配置</p>
+<p>如果你需要查看Docker的基础知识，可以访问<a href="https://panda-l1.github.io/junwei/bb88bfb7.html">后端开发入门Docker：从基础到实践 | Panda)</a></p>
+<h2 id="Linux系统中创建目录"><a href="#Linux系统中创建目录" class="headerlink" title="Linux系统中创建目录"></a>Linux系统中创建目录</h2><p>在root目录下创建文件夹，用于本地目录挂载</p>
+<ol>
+<li>创建maiba文件（自定义名称，这里使用项目名），用于存放所有文件</li>
+<li>在<code>maiba</code>文件夹中创建三个文件夹<code>nginx</code>、<code>mysql</code>、<code>redis</code></li>
+</ol>
+<img src="../images/b42087a8/7.png" alt="7" style="zoom:80%;" />
+
+<ol start="3">
+<li>其他文件等我们配置好，在后面的步骤再单独放入</li>
+</ol>
+<h2 id="前端构建"><a href="#前端构建" class="headerlink" title="前端构建"></a>前端构建</h2><p>打开你的 Vue 项目，在终端中输入<code>npm run build</code>命令，直到看见<code>Build complete.</code>说明打包完成</p>
+<p><img src="/../images/b42087a8/1.png" alt="1"></p>
+<p>打包完成后你会在目录中看见一个<code>dist</code>文件夹，里面会有<code>index.html</code>文件和<code>css</code>、<code>img</code>、<code>js</code>等文件夹</p>
+<p><img src="/../images/b42087a8/2.png" alt="2"></p>
+<p>将<code>dist</code>文件夹名改为自定义名称（这里使用 maiba ），放入创建好的<code>nginx</code>文件夹中的<code>html</code>文件夹中</p>
+<p><img src="/../images/b42087a8/8.png" alt="image-20240805154044362"></p>
+<h2 id="Nginx基本配置"><a href="#Nginx基本配置" class="headerlink" title="Nginx基本配置"></a>Nginx基本配置</h2><p>准备<code>nginx.conf</code>文件，设置与本地部署基本一致，但是需要注意：</p>
+<ul>
+<li><p><strong>网站根目录</strong>设置需要设置你的文件夹名，且路径是Docker容器中的路径（已挂载到本地<code>html</code>文件夹）</p>
+</li>
+<li><p><strong>服务器名称</strong>和<strong>后端的服务地址</strong>不再使用<code>IP</code>，而是使用Docker中自定义桥接网络的名称（这里使用<code>maiba</code>）</p>
+</li>
+</ul>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">worker_processes</span>  <span class="string">1;  # 定义工作进程数量</span></span><br><span class="line"></span><br><span class="line"><span class="attr">events</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">worker_connections</span>  <span class="string">1024;  # 定义每个工作进程的最大连接数</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">http</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">include</span>       <span class="string">mime.types;  # 包含文件类型定义</span></span><br><span class="line">    <span class="attr">default_type</span>  <span class="string">application/octet-stream;  # 默认文件类型</span></span><br><span class="line">    <span class="attr">sendfile</span>        <span class="string">on;  # 开启高效文件传输模式</span></span><br><span class="line"></span><br><span class="line">    <span class="attr">keepalive_timeout</span>  <span class="string">65;  # 连接保持超时时间</span></span><br><span class="line">    <span class="attr">server</span> <span class="string">&#123;</span></span><br><span class="line">        <span class="attr">listen</span>       <span class="string">80;  # 监听端口号</span></span><br><span class="line">        <span class="attr">server_name</span>  <span class="string">maiba;  # 服务器名称</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/ &#123;</span></span><br><span class="line">            <span class="attr">root</span>   <span class="string">/usr/share/nginx/html/maiba;  # 网站根目录</span></span><br><span class="line">            <span class="attr">index</span>  <span class="string">index.html index.htm;  # 默认首页文件</span></span><br><span class="line">        <span class="attr">&#125;</span></span><br><span class="line">        <span class="attr">error_page</span>   <span class="string">500 502 503 504  /50x.html;  # 错误页面配置</span></span><br><span class="line">        <span class="attr">location</span> = <span class="string">/50x.html &#123;</span></span><br><span class="line">            <span class="attr">root</span>   <span class="string">html;  # 错误页面根目录</span></span><br><span class="line">        <span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/api/ &#123;</span></span><br><span class="line">            <span class="attr">proxy_pass</span> <span class="string">http://maiba:8080;  # 后端服务地址</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">Host $host;  # 设置请求头Host</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Real-IP $remote_addr;  # 设置请求头X-Real-IP</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forwarded-For $proxy_add_x_forwarded_for;  # 设置请求头X-Forwarded-For</span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forwarded-Proto $scheme;  # 设置请求头X-Forwarded-Proto</span></span><br><span class="line">        <span class="attr">&#125;</span></span><br><span class="line">    <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>将准备好的<code>nginx.conf</code>文件放入<code>nginx</code>文件夹，与<code>html</code>文件夹并列</p>
+<p><img src="/../images/b42087a8/9.png" alt="9"></p>
+<h2 id="后端打包"><a href="#后端打包" class="headerlink" title="后端打包"></a>后端打包</h2><ol>
+<li>在项目<code>pom.xml</code>文件中修改配置，避免出现<code>no main manifest attribute</code>错误，找到<code>&lt;plugin&gt;</code>下的<code>&lt;configuration&gt;</code>标签</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mainClass</span>&gt;</span>com.xxx.SpringbootMaibaApplication<span class="tag">&lt;/<span class="name">mainClass</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- &lt;skip&gt;true&lt;/skip&gt; --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 将上面skip标签注释掉或删掉，添加如下includeSystemScope标签 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">includeSystemScope</span>&gt;</span>true<span class="tag">&lt;/<span class="name">includeSystemScope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>检查确保在<code>application.properties</code>或<code>application.yml</code>中关于MySQL和Redis的配置正确<ul>
+<li>使用我们设置的自定义的桥接网络名（这里用maiba）代替<code>localhost</code></li>
+<li>使用<code>redis</code>作为 redis 的 host （在后面的 Docker Compose 文件中，Redis 服务的名称是 <code>redis</code>）</li>
+</ul>
+</li>
+</ol>
+<p><img src="/../images/b42087a8/17.png" alt="17"></p>
+<ol start="3">
+<li>在IDEA右侧的Maven工具栏中点击<code>package</code>打包，这时候会在<code>target</code>文件夹中看到一个<code>jar</code>包</li>
+</ol>
+<img src="../images/b42087a8/10.png" alt="10" style="zoom: 40%;" />
+
+<ol start="4">
+<li>复制<code>jar</code>包，修改成自定义名字（这里使用 maiba ），将其发送到Linux中的<code>maiba</code>根目录下</li>
+</ol>
+<img src="../images/b42087a8/11.png" alt="11" style="zoom: 60%;" />
+
+<h2 id="准备-Dockerfile"><a href="#准备-Dockerfile" class="headerlink" title="准备 Dockerfile"></a>准备 Dockerfile</h2><ol>
+<li>准备<code>Dockerfile</code>文件，将其中的<code>jar</code>包名修改成自己的（这里为maiba）</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基础镜像</span></span><br><span class="line"><span class="attr">FROM</span> <span class="string">openjdk:11.0-jre-buster</span></span><br><span class="line"><span class="comment"># 设定时区</span></span><br><span class="line"><span class="attr">ENV</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line"><span class="attr">RUN</span> <span class="string">ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone</span></span><br><span class="line"><span class="comment"># 拷贝jar包</span></span><br><span class="line"><span class="attr">COPY</span> <span class="string">maiba.jar /app.jar</span></span><br><span class="line"><span class="comment"># 入口</span></span><br><span class="line"><span class="attr">ENTRYPOINT</span> <span class="string">[&quot;java&quot;, &quot;-jar&quot;, &quot;/app.jar&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>确保<code>Dockerfile</code>被放在你的项目根目录下（这里为maiba），与<code>jar</code>包要在一个目录，因为Dockerfile文件中使用了相对路径</li>
+</ol>
+<img src="../images/b42087a8/16.png" alt="16" style="zoom:67%;" />
+
+<h2 id="放入MySQL和Redis的初始化文件"><a href="#放入MySQL和Redis的初始化文件" class="headerlink" title="放入MySQL和Redis的初始化文件"></a>放入MySQL和Redis的初始化文件</h2><ol>
+<li>在MySQL文件夹中创建两个文件夹<code>init</code>和<code>conf</code></li>
+</ol>
+<img src="../images/b42087a8/12.png" alt="12" style="zoom:67%;" />
+
+<ol start="2">
+<li>在<code>init</code>文件夹中放入你的<code>sql</code>文件，这样在MySQL容器创建的时候，你的数据库就创建好了</li>
+<li>在<code>conf</code>文件夹中放入一个简单的<code>maiba.cnf</code>文件（名字自定义，这里叫 maiba ），简单设置一下字符集</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">[client]</span></span><br><span class="line"><span class="attr">default_character_set</span>=<span class="string">utf8mb4</span></span><br><span class="line"><span class="attr">[mysql]</span></span><br><span class="line"><span class="attr">default_character_set</span>=<span class="string">utf8mb4</span></span><br><span class="line"><span class="attr">[mysqld]</span></span><br><span class="line"><span class="attr">character_set_server</span>=<span class="string">utf8mb4</span></span><br><span class="line"><span class="attr">collation_server</span>=<span class="string">utf8mb4_unicode_ci</span></span><br><span class="line"><span class="attr">init_connect</span>=<span class="string">&#x27;SET NAMES utf8mb4&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>确保 mysql 文件夹中的两个文件夹中文件都正确放置</li>
+</ol>
+<div style="display: flex; justify-content: center; align-items: center;">
+    <img src="../images/b42087a8/14.png" width="400"/>
+    <img src="../images/b42087a8/13.png" width="430"/>
+</div>
+
+
+<ol start="5">
+<li><p>在<code>redis</code>文件夹中放入准备好的<code>dump.rdb</code>文件和<code>redis.conf</code>文件</p>
+<ul>
+<li><p>前者为你需要初始化的的Redis数据，由Redis生成，找到复制过来即可</p>
+</li>
+<li><p>后者为redis的配置文件，注意需要设置 <code>daemonize</code> 为 <code>no</code>，否则会出现<code>redis</code>启动后又正常退出的问题</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>在 Docker 容器中运行 Redis 时，不需要设置 <code>daemonize</code> 为 <code>yes</code>。原因是 Docker 容器本身就是一个单独的进程，如果 Redis 容器以守护进程模式运行，会导致容器立即退出。</p>
+<ul>
+<li><strong>守护进程模式</strong>：当 <code>daemonize yes</code> 时，Redis 会在后台运行，并且主进程会退出。而在 Docker 中，主进程的退出意味着容器的退出。</li>
+<li><strong>前台运行</strong>：Docker 容器的最佳实践是让主进程在前台运行，以便 Docker 可以管理进程生命周期。</li>
+</ul>
+</blockquote>
+<ol start="6">
+<li>确保redis文件夹中的两文件都正确放置</li>
+</ol>
+<img src="../images/b42087a8/15.png" alt="15" style="zoom:80%;" />
+
+<h2 id="创建-Docker-Compose-文件"><a href="#创建-Docker-Compose-文件" class="headerlink" title="创建 Docker Compose 文件"></a>创建 Docker Compose 文件</h2><ol>
+<li>创建<code>docker-compose.yml</code>文件，输入下面内容</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3.8&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mysql:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mysql</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3306:3306&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">TZ:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line">      <span class="attr">MYSQL_ROOT_PASSWORD:</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./mysql/conf:/etc/mysql/conf.d&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./mysql/data:/var/lib/mysql&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./mysql/init:/docker-entrypoint-initdb.d&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">new</span></span><br><span class="line">  <span class="attr">maiba:</span></span><br><span class="line">    <span class="attr">build:</span> </span><br><span class="line">      <span class="attr">context:</span> <span class="string">.</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">maiba</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">new</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mysql</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:80&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./nginx/nginx.conf:/etc/nginx/nginx.conf&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./nginx/html:/usr/share/nginx/html&quot;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">maiba</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">new</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">redis</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis/dump.rdb:/data/dump.rdb</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./redis/redis.conf:/usr/local/etc/redis/redis.conf</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;redis-server&quot;</span>, <span class="string">&quot;/usr/local/etc/redis/redis.conf&quot;</span>]</span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;6379:6379&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">new</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">new:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">maiba</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们四个容器都使用了自定义桥接网络<code>maiba</code>，所以在之前的Nginx配置文件和后端连接MySQL的配置中我们都使用了<code>maiba</code>代替</p>
+<p>需要注意密码等设置要和自己在后端的Properties中配置的一致，端口也根据需要进行设置</p>
+<p>并且我们都对容器挂载了本地目录，可以实现数据的永久保存</p>
+</blockquote>
+<ol start="2">
+<li>确保<code>docker-compose.yml</code>被放在你的项目根目录下（这里为maiba）</li>
+</ol>
+<p><img src="/../images/b42087a8/18.png" alt="18"></p>
+<h2 id="构建和启动-Docker-容器"><a href="#构建和启动-Docker-容器" class="headerlink" title="构建和启动 Docker 容器"></a>构建和启动 Docker 容器</h2><p>前面的步骤做完，确保好文件都放置正确了，我们终于可以一键构建容器并运行了</p>
+<ol>
+<li>在终端中使用<code>cd ~</code>回到 root 目录，运行<code>cd maiba</code>进入项目文件夹，运行<code>docker compose up -d</code>，完成所有的容器创建</li>
+</ol>
+<ul>
+<li>第一次运行，会根据 Dockerfile 文件生成 maiba 后端容器镜像（蓝色部分），其他镜像如果曾经<code>docker pull</code>过，则无需下载，省时</li>
+<li>然后就会依次创建所有容器，并挂载到我们指定的目录，加入相同的网络</li>
+</ul>
+<p><img src="/../images/b42087a8/19.png" alt="19"></p>
+<ol start="2">
+<li>执行<code>docker ps</code>查看到所有容器都启动成功并且显示端口，证明正常创建</li>
+</ol>
+<p><img src="/../images/b42087a8/20.png" alt="20"></p>
+<ol start="3">
+<li>执行<code>docker network inspect maiba</code>，查看该网络，可以看到四个容器都添加到了同一网络中</li>
+</ol>
+<img src="../images/b42087a8/22.png" alt="22" style="zoom:60%;" />
+
+<blockquote>
+<p>如果遇到了失败的情况，可以执行<code>docker logs container_name</code>查看具体错误并解决它即可</p>
+</blockquote>
+<h2 id="部署与测试-2"><a href="#部署与测试-2" class="headerlink" title="部署与测试"></a>部署与测试</h2><p>所有容器正常启动，在浏览器中输入Linux系统的 IP 地址或云服务器的地址访问，能看到前端页面和请求状态码200说明成功了（注意开放Nginx的端口）</p>
+<p><img src="/../images/b42087a8/23.png" alt="23"></p>
+<p>Navicat中也可以访问MySQL和Redis中的数据，说明数据根据<code>sql</code>和<code>rdb</code>文件也初始化成功</p>
+<p><img src="/../images/b42087a8/21.png" alt="21"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文档详细介绍了三种前后端部署的方法：集成dist文件到后端、使用Nginx反向代理实现前后端分离部署，以及使用Docker容器化部署。每种方法都提供了具体的步骤和技术细节，帮助读者理解如何有效地部署应用程序。</p>
+<p>对于集成dist文件到后端的方法，文档演示了如何在Vue项目中构建前端代码，并将构建产物集成到Spring Boot后端项目中，通过简单的后端配置就能实现前后端的集成部署。</p>
+<p>使用Nginx反向代理的方式，则实现了前后端的分离部署。通过配置Nginx服务器来代理前端静态资源，并将API请求转发给后端服务，这种方式能够更好地解耦前后端，便于维护和扩展。</p>
+<p>最后，文档深入讲解了如何利用Docker进行容器化部署。不仅涵盖了前端构建、Nginx配置，还详细说明了如何准备Dockerfile、配置MySQL和Redis的初始化文件，以及如何使用Docker Compose文件来编排多个服务容器，包括后端应用、数据库、缓存服务等，从而实现一键式的自动化部署流程。</p>
+<p>通过这些方法，开发者可以根据项目的实际需求选择最合适的部署策略，无论是简单的集成部署还是复杂的多服务容器化部署都能应对自如。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://panda-l1.github.io">PandaLi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://panda-l1.github.io/junwei/b42087a8.html">https://panda-l1.github.io/junwei/b42087a8.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://panda-l1.github.io" target="_blank">Panda</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%83%A8%E7%BD%B2/">部署</a></div><div class="post_share"><div class="social-share" data-image="/../images/b42087a8/cover.png" data-sites="wechat,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/junwei/bb88bfb7.html" title="后端开发入门Docker：从基础到实践"><img class="cover" src="/./images/docker/docker.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">后端开发入门Docker：从基础到实践</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/images/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">PandaLi</div><div class="author-info__description">悟已往之不谏，知来者之可追</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Panda-L1"><i class="iconfont icon-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Panda-L1" target="_blank" title="Github"><i class="iconfont icon-github"></i></a><a class="social-icon" href="https://gitee.com/pandal1" target="_blank" title="Gitee"><i class="iconfont icon-gitee"></i></a><a class="social-icon" href="https://blog.csdn.net/m0_73310000" target="_blank" title="CSDN"><i class="iconfont icon-csdn_hong"></i></a><a class="social-icon" href="mailto:junwei5289@gmail.com" target="_blank" title="Email"><i class="iconfont icon--gmail"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content"><p align="center"><font color="#e66b6d"><b>双</b></font> <font color="#e66d98"><b>手</b></font> <font color="#e66cc6"><b>合</b></font> <font color="#cc6de6"><b>十</b></font> <font color="#9770e6"><b>成</b></font> <font color="#6d93e6"><b>为</b></font> <font color="#6fcde6"><b>自</b></font> <font color="#72e6b6"><b>己</b></font> <font color="#72e689"><b>的</b></font> <font color="#99e670"><b>神</b></font></p> <p align="center"><font color="#cde670"><b>自</b></font> <font color="#e6df72"><b>己</b></font> <font color="#e6c073"><b>所</b></font> <font color="#e6a271"><b>信</b></font> <font color="#e6796f"><b>念</b></font> <font color="#e65454"><b>的</b></font> <font color="#e63333"><b>即</b></font> <font color="#e62c2c"><b>是</b></font> <font color="#e60101"><b>信</b></font> <font color="#e60101"><b>仰</b></font></p> <p align="center"><img src="https://haiyong.site/img/img-blog.csdnimg.cn/f7384c88956d4378b72e47548e19c9f8.gif" width="50" alt="mao"></p> <p align="center"><font color="#e66b6d"><b>微</b></font> <font color="#e66d98"><b>信</b></font> <font color="#e66cc6"><b>号</b></font> <font color="#cc6de6"><b>：</b></font> <font color="#9770e6"><b>L</b></font> <font color="#6d93e6"><b>I</b></font> <font color="#6fcde6"><b>J</b></font> <font color="#72e6b6"><b>J</b></font> <font color="#72e689"><b>J</b></font> <font color="#99e670"><b>W</b></font> <font color="#cde670"><b>E</b></font> <font color="#e6df72"><b>I</b></font></p> <p align="center"><font color="#e66b6d"><b>Q</b></font> <font color="#e66d98"><b>Q</b></font> <font color="#e66cc6"><b>号</b></font> <font color="#cc6de6"><b>：</b></font> <font color="#9770e6"><b>2</b></font> <font color="#6d93e6"><b>8</b></font> <font color="#6fcde6"><b>4</b></font> <font color="#72e6b6"><b>8</b></font> <font color="#72e689"><b>5</b></font> <font color="#99e670"><b>2</b></font> <font color="#cde670"><b>7</b></font> <font color="#e6df72"><b>4</b></font> <font color="#e6c073"><b>8</b></font> <font color="#e6a271"><b>5</b></font></p></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%86-Vue%E6%89%93%E5%8C%85%E6%96%87%E4%BB%B6%E7%9B%B4%E6%8E%A5%E9%9B%86%E6%88%90%E5%88%B0%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2"><span class="toc-number">1.</span> <span class="toc-text">将 Vue打包文件直接集成到后端部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E8%BE%93%E5%87%BA"><span class="toc-number">1.1.</span> <span class="toc-text">配置前端构建输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86-dist-%E4%B8%AD%E6%96%87%E4%BB%B6%E5%A4%8D%E5%88%B6%E5%88%B0%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E4%B8%AD"><span class="toc-number">1.2.</span> <span class="toc-text">将 dist 中文件复制到后端项目中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%90%8E%E7%AB%AF%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BB%A5%E6%9C%8D%E5%8A%A1%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">配置后端服务器以服务静态文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%B5%8B%E8%AF%95"><span class="toc-number">1.4.</span> <span class="toc-text">部署与测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%83%A8%E7%BD%B2"><span class="toc-number">2.</span> <span class="toc-text">使用 Nginx 反向代理实现前后端分离部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA%E8%BE%93%E5%87%BA-1"><span class="toc-number">2.1.</span> <span class="toc-text">配置前端构建输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">设置 Nginx 反向代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%B5%8B%E8%AF%95-1"><span class="toc-number">2.3.</span> <span class="toc-text">部署与测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%80%9A%E8%BF%87-Docker-%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E7%AB%AF%E7%9A%84%E5%AE%B9%E5%99%A8%E5%8C%96%E9%83%A8%E7%BD%B2"><span class="toc-number">3.</span> <span class="toc-text">通过 Docker 实现前后端的容器化部署</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95"><span class="toc-number">3.1.</span> <span class="toc-text">Linux系统中创建目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E6%9E%84%E5%BB%BA"><span class="toc-number">3.2.</span> <span class="toc-text">前端构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">Nginx基本配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E6%89%93%E5%8C%85"><span class="toc-number">3.4.</span> <span class="toc-text">后端打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87-Dockerfile"><span class="toc-number">3.5.</span> <span class="toc-text">准备 Dockerfile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BE%E5%85%A5MySQL%E5%92%8CRedis%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%87%E4%BB%B6"><span class="toc-number">3.6.</span> <span class="toc-text">放入MySQL和Redis的初始化文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA-Docker-Compose-%E6%96%87%E4%BB%B6"><span class="toc-number">3.7.</span> <span class="toc-text">创建 Docker Compose 文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E5%92%8C%E5%90%AF%E5%8A%A8-Docker-%E5%AE%B9%E5%99%A8"><span class="toc-number">3.8.</span> <span class="toc-text">构建和启动 Docker 容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%B5%8B%E8%AF%95-2"><span class="toc-number">3.9.</span> <span class="toc-text">部署与测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/junwei/b42087a8.html" title="部署之道：整合、分离与容器化的前后端部署方法"><img src="/../images/b42087a8/cover.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="部署之道：整合、分离与容器化的前后端部署方法"/></a><div class="content"><a class="title" href="/junwei/b42087a8.html" title="部署之道：整合、分离与容器化的前后端部署方法">部署之道：整合、分离与容器化的前后端部署方法</a><time datetime="2024-08-04T14:29:08.000Z" title="发表于 2024-08-04 22:29:08">2024-08-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/bb88bfb7.html" title="后端开发入门Docker：从基础到实践"><img src="/./images/docker/docker.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="后端开发入门Docker：从基础到实践"/></a><div class="content"><a class="title" href="/junwei/bb88bfb7.html" title="后端开发入门Docker：从基础到实践">后端开发入门Docker：从基础到实践</a><time datetime="2024-08-01T03:41:03.000Z" title="发表于 2024-08-01 11:41:03">2024-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/ba0dd480.html" title="Tabby：一款出色的开源终端工具"><img src="/../images/tools/tabby/tabby.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Tabby：一款出色的开源终端工具"/></a><div class="content"><a class="title" href="/junwei/ba0dd480.html" title="Tabby：一款出色的开源终端工具">Tabby：一款出色的开源终端工具</a><time datetime="2024-08-01T00:17:24.000Z" title="发表于 2024-08-01 08:17:24">2024-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/af87aed8.html" title="Redis分布式实现：持久化和集群方案"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis分布式实现：持久化和集群方案"/></a><div class="content"><a class="title" href="/junwei/af87aed8.html" title="Redis分布式实现：持久化和集群方案">Redis分布式实现：持久化和集群方案</a><time datetime="2024-07-29T11:13:10.000Z" title="发表于 2024-07-29 19:13:10">2024-07-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"><img src="/images/redis/Redis.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计"/></a><div class="content"><a class="title" href="/junwei/d031d93f.html" title="Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计">Redis实战篇（三）：达人探店、好友关注、附近商户、用户签到、UV统计</a><time datetime="2024-07-26T06:52:41.000Z" title="发表于 2024-07-26 14:52:41">2024-07-26</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/../images/b42087a8/cover.png')"><div id="footer-wrap"><div class="copyright">&copy;2024 By PandaLi</div><div class="footer_custom_text">用清晰的视角，做有用的博客</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://junwei5289.netlify.app/.netlify/functions/twikoo',
+      region: 'ap-guangzhou',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://junwei5289.netlify.app/.netlify/functions/twikoo',
+      region: 'ap-guangzhou',
+      onCommentLoaded: () => {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+
+    GLOBAL_CONFIG_SITE.isPost && getCount()
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(init,0)
+    else getScript('https://cdn.jsdelivr.net/npm/twikoo@1.6.31/dist/twikoo.all.min.js').then(init)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div></body></html>
